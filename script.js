@@ -13,14 +13,9 @@ const designs = [
 
 const gallery = document.getElementById('gallery');
 const template = document.getElementById('card-template');
-const modal = document.getElementById('image-modal');
-const modalImage = document.getElementById('modal-image');
-const modalCaption = document.getElementById('modal-caption');
-const closeModal = document.getElementById('close-modal');
 
 designs.forEach((design, index) => {
   const card = template.content.cloneNode(true);
-  const article = card.querySelector('.card');
   const image = card.querySelector('img');
   const title = card.querySelector('h2');
   const note = card.querySelector('p');
@@ -29,21 +24,6 @@ designs.forEach((design, index) => {
   image.alt = `${design.name} blouse design`;
   title.textContent = `${index + 1}. ${design.name}`;
   note.textContent = design.note;
-  article.addEventListener('click', () => {
-    modalImage.src = design.file;
-    modalImage.alt = `${design.name} blouse design full preview`;
-    modalCaption.textContent = `${index + 1}. ${design.name} — ${design.note}`;
-    modal.showModal();
-  });
 
   gallery.appendChild(card);
-});
-
-closeModal.addEventListener('click', () => modal.close());
-
-modal.addEventListener('click', (event) => {
-  const isBackdropClick = event.target === modal;
-  if (isBackdropClick) {
-    modal.close();
-  }
 });
